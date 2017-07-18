@@ -20,6 +20,7 @@ But you're still going to have to learn a little bit of code and this is why I s
 
 And finally that brings us to the hardware level for which i picked the beloved Arduino platform. Learning how to code enough to make this work was the most time extensive, about 2 sleepless days for me before I had all the sensors sending data to MQTT. If you know Arduino its a great advantage but I'll be providing sketches on GitHub that you can modify and compile in the Arduino IDE.  However I've done all the heavy lifting here. Proceed only if you dare - arduino.cc
 
+/thegrowingdude
 
 
 
