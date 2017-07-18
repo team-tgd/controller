@@ -1,0 +1,573 @@
+[
+    {
+        "id": "74cdd255.438c9c",
+        "type": "tab",
+        "label": "Flow 1"
+    },
+    {
+        "id": "87ffb2b9.cab13",
+        "type": "mqtt in",
+        "z": "74cdd255.438c9c",
+        "name": "CO/2 Supplementation",
+        "topic": "garden/ppm",
+        "qos": "0",
+        "broker": "18277561.60952b",
+        "x": 113,
+        "y": 327,
+        "wires": [
+            [
+                "3d7fd262.00c63e"
+            ]
+        ]
+    },
+    {
+        "id": "13615d31.f344a3",
+        "type": "function",
+        "z": "74cdd255.438c9c",
+        "name": "0\\1 thresholds",
+        "func": "if (msg.payload < 400 ){\n msg.payload = 0;\n return msg;\n} else {\n msg.payload = 1;\n return msg;\n}\nreturn null;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 491,
+        "y": 326,
+        "wires": [
+            [
+                "cf454876.3df808",
+                "bd931e92.f0ffe"
+            ]
+        ]
+    },
+    {
+        "id": "cf454876.3df808",
+        "type": "debug",
+        "z": "74cdd255.438c9c",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 715,
+        "y": 345,
+        "wires": []
+    },
+    {
+        "id": "bd931e92.f0ffe",
+        "type": "mqtt out",
+        "z": "74cdd255.438c9c",
+        "name": "CO\\2 Solenoid O5",
+        "topic": "garden/5",
+        "qos": "0",
+        "retain": "",
+        "broker": "18277561.60952b",
+        "x": 741,
+        "y": 286,
+        "wires": []
+    },
+    {
+        "id": "3d7fd262.00c63e",
+        "type": "delay",
+        "z": "74cdd255.438c9c",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "x": 313,
+        "y": 326,
+        "wires": [
+            [
+                "13615d31.f344a3"
+            ]
+        ]
+    },
+    {
+        "id": "629e0743.b51238",
+        "type": "inject",
+        "z": "74cdd255.438c9c",
+        "name": "VegLightOn",
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "00 4 * * *",
+        "once": false,
+        "x": 98,
+        "y": 20,
+        "wires": [
+            [
+                "dda2b3f5.58ce2",
+                "811a3b32.180a38"
+            ]
+        ]
+    },
+    {
+        "id": "dda2b3f5.58ce2",
+        "type": "mqtt out",
+        "z": "74cdd255.438c9c",
+        "name": "veg light",
+        "topic": "garden/1",
+        "qos": "",
+        "retain": "",
+        "broker": "18277561.60952b",
+        "x": 318,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "6f8b12c3.0ce69c",
+        "type": "inject",
+        "z": "74cdd255.438c9c",
+        "name": "VegLightOff",
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "00 00 * * *",
+        "once": false,
+        "x": 98,
+        "y": 83,
+        "wires": [
+            [
+                "dda2b3f5.58ce2",
+                "811a3b32.180a38"
+            ]
+        ]
+    },
+    {
+        "id": "811a3b32.180a38",
+        "type": "debug",
+        "z": "74cdd255.438c9c",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 326,
+        "y": 84,
+        "wires": []
+    },
+    {
+        "id": "1d94439f.5b062c",
+        "type": "inject",
+        "z": "74cdd255.438c9c",
+        "name": "FlowerLightOn",
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "00 8 * * *",
+        "once": false,
+        "x": 569,
+        "y": 20,
+        "wires": [
+            [
+                "b96dd234.3ce08",
+                "cf43bb1d.3e1c38"
+            ]
+        ]
+    },
+    {
+        "id": "b96dd234.3ce08",
+        "type": "mqtt out",
+        "z": "74cdd255.438c9c",
+        "name": "flower light",
+        "topic": "garden/2",
+        "qos": "",
+        "retain": "",
+        "broker": "18277561.60952b",
+        "x": 877,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "1540a301.e887ed",
+        "type": "inject",
+        "z": "74cdd255.438c9c",
+        "name": "FlowerLightOff",
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "00 20 * * *",
+        "once": false,
+        "x": 566,
+        "y": 80,
+        "wires": [
+            [
+                "b96dd234.3ce08",
+                "cf43bb1d.3e1c38"
+            ]
+        ]
+    },
+    {
+        "id": "cf43bb1d.3e1c38",
+        "type": "debug",
+        "z": "74cdd255.438c9c",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 873,
+        "y": 78,
+        "wires": []
+    },
+    {
+        "id": "cd25561a.d7b6f8",
+        "type": "mqtt in",
+        "z": "74cdd255.438c9c",
+        "name": "Temperature Regulation",
+        "topic": "garden/temp",
+        "qos": "0",
+        "broker": "18277561.60952b",
+        "x": 107,
+        "y": 448,
+        "wires": [
+            [
+                "cc5baf86.95cab"
+            ]
+        ]
+    },
+    {
+        "id": "d399d434.4ce7f8",
+        "type": "function",
+        "z": "74cdd255.438c9c",
+        "name": "0\\1 thresholds",
+        "func": "if (msg.payload < 65 ){\n msg.payload = 0;\n return msg;\n} else {\n msg.payload = 1;\n return msg;\n}\nreturn null;",
+        "outputs": "1",
+        "noerr": 0,
+        "x": 495,
+        "y": 447,
+        "wires": [
+            [
+                "d25b6f74.5aee",
+                "db3d4992.1571d8"
+            ]
+        ]
+    },
+    {
+        "id": "d25b6f74.5aee",
+        "type": "mqtt out",
+        "z": "74cdd255.438c9c",
+        "name": "Heater O6",
+        "topic": "garden/6",
+        "qos": "0",
+        "retain": "",
+        "broker": "18277561.60952b",
+        "x": 713,
+        "y": 397,
+        "wires": []
+    },
+    {
+        "id": "db3d4992.1571d8",
+        "type": "debug",
+        "z": "74cdd255.438c9c",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 707,
+        "y": 461,
+        "wires": []
+    },
+    {
+        "id": "cc5baf86.95cab",
+        "type": "delay",
+        "z": "74cdd255.438c9c",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "x": 307,
+        "y": 448,
+        "wires": [
+            [
+                "d399d434.4ce7f8"
+            ]
+        ]
+    },
+    {
+        "id": "f296ae01.bce12",
+        "type": "mqtt in",
+        "z": "74cdd255.438c9c",
+        "name": "Humidity Regulation",
+        "topic": "garden/RH",
+        "qos": "0",
+        "broker": "18277561.60952b",
+        "x": 95,
+        "y": 555,
+        "wires": [
+            [
+                "da26f85d.c23968"
+            ]
+        ]
+    },
+    {
+        "id": "cae30ebb.59485",
+        "type": "function",
+        "z": "74cdd255.438c9c",
+        "name": "0\\1 thresholds",
+        "func": "if (msg.payload > 60 ){\n msg.payload = 0;\n return msg;\n} else {\n msg.payload = 1;\n return msg;\n}\nreturn null;",
+        "outputs": "1",
+        "noerr": 0,
+        "x": 493,
+        "y": 554,
+        "wires": [
+            [
+                "faf00e34.c14d1",
+                "27e6e1f0.d98eae"
+            ]
+        ]
+    },
+    {
+        "id": "faf00e34.c14d1",
+        "type": "mqtt out",
+        "z": "74cdd255.438c9c",
+        "name": "Dehumidifier O7",
+        "topic": "garden/7",
+        "qos": "0",
+        "retain": "",
+        "broker": "18277561.60952b",
+        "x": 710,
+        "y": 509,
+        "wires": []
+    },
+    {
+        "id": "27e6e1f0.d98eae",
+        "type": "debug",
+        "z": "74cdd255.438c9c",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 699,
+        "y": 579,
+        "wires": []
+    },
+    {
+        "id": "da26f85d.c23968",
+        "type": "delay",
+        "z": "74cdd255.438c9c",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "5",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "x": 305,
+        "y": 555,
+        "wires": [
+            [
+                "cae30ebb.59485"
+            ]
+        ]
+    },
+    {
+        "id": "a337dda5.b460a",
+        "type": "inject",
+        "z": "74cdd255.438c9c",
+        "name": "Veg Feeding Start",
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "00 8 * * *",
+        "once": false,
+        "x": 108,
+        "y": 161,
+        "wires": [
+            [
+                "26e329bc.243006",
+                "1268468f.d39929"
+            ]
+        ]
+    },
+    {
+        "id": "26e329bc.243006",
+        "type": "mqtt out",
+        "z": "74cdd255.438c9c",
+        "name": "Veg Pump O3",
+        "topic": "garden/3",
+        "qos": "",
+        "retain": "",
+        "broker": "18277561.60952b",
+        "x": 328,
+        "y": 161,
+        "wires": []
+    },
+    {
+        "id": "7c7a47f2.36d368",
+        "type": "inject",
+        "z": "74cdd255.438c9c",
+        "name": "Veg Feeding Stop",
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "05 8 * * *",
+        "once": false,
+        "x": 108,
+        "y": 224,
+        "wires": [
+            [
+                "26e329bc.243006",
+                "1268468f.d39929"
+            ]
+        ]
+    },
+    {
+        "id": "1268468f.d39929",
+        "type": "debug",
+        "z": "74cdd255.438c9c",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 316,
+        "y": 225,
+        "wires": []
+    },
+    {
+        "id": "9b8b3bed.61aa98",
+        "type": "inject",
+        "z": "74cdd255.438c9c",
+        "name": "Flower Feeding Start",
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "00 9 * * *",
+        "once": false,
+        "x": 579,
+        "y": 161,
+        "wires": [
+            [
+                "fbcf5d63.9341b",
+                "4df07635.feea98"
+            ]
+        ]
+    },
+    {
+        "id": "fbcf5d63.9341b",
+        "type": "mqtt out",
+        "z": "74cdd255.438c9c",
+        "name": "Flower Pump O4",
+        "topic": "garden/4",
+        "qos": "",
+        "retain": "",
+        "broker": "18277561.60952b",
+        "x": 887,
+        "y": 161,
+        "wires": []
+    },
+    {
+        "id": "22a65686.35f62a",
+        "type": "inject",
+        "z": "74cdd255.438c9c",
+        "name": "Flower Feeding Stop",
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "repeat": "",
+        "crontab": "10 9 * * *",
+        "once": false,
+        "x": 576,
+        "y": 221,
+        "wires": [
+            [
+                "fbcf5d63.9341b",
+                "4df07635.feea98"
+            ]
+        ]
+    },
+    {
+        "id": "4df07635.feea98",
+        "type": "debug",
+        "z": "74cdd255.438c9c",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 863,
+        "y": 219,
+        "wires": []
+    },
+    {
+        "id": "d3010533.442ca8",
+        "type": "inject",
+        "z": "74cdd255.438c9c",
+        "name": "Fans On",
+        "topic": "garden/8",
+        "payload": "0",
+        "payloadType": "num",
+        "repeat": "900",
+        "crontab": "",
+        "once": true,
+        "x": 70,
+        "y": 635,
+        "wires": [
+            [
+                "a96a554e.ee2e78",
+                "16f13d83.dbd972"
+            ]
+        ]
+    },
+    {
+        "id": "a96a554e.ee2e78",
+        "type": "mqtt out",
+        "z": "74cdd255.438c9c",
+        "name": "Ventialation Fans O8",
+        "topic": "garden/8",
+        "qos": "0",
+        "retain": "",
+        "broker": "18277561.60952b",
+        "x": 311,
+        "y": 610,
+        "wires": []
+    },
+    {
+        "id": "16f13d83.dbd972",
+        "type": "debug",
+        "z": "74cdd255.438c9c",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 283,
+        "y": 661,
+        "wires": []
+    },
+    {
+        "id": "18277561.60952b",
+        "type": "mqtt-broker",
+        "z": "",
+        "broker": "192.168.1.186",
+        "port": "1883",
+        "clientid": "NodeRED",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "garden/debug",
+        "willQos": "0",
+        "willPayload": "Node-RED out!",
+        "birthTopic": "garden/debug",
+        "birthQos": "0",
+        "birthPayload": "Node-RED Connected"
+    }
+]
