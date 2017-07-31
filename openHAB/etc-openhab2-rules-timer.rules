@@ -1,0 +1,12 @@
+mySwitch8.sendCommand(ON)
+end
+
+rule "turn mySwitch8 off"
+when
+Time cron "0 44 20 ? * *"
+then
+mySwitch8.sendCommand(OFF)
+end
+
+
+

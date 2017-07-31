@@ -1,0 +1,11 @@
+Switch mySwitch1 {mqtt=">[broker:garden/1:command:ON:0],>[broker:garden/1:comma$
+Switch mySwitch2 {mqtt=">[broker:garden/2:command:ON:0],>[broker:garden/2:comma$
+Switch mySwitch3 {mqtt=">[broker:garden/3:command:ON:0],>[broker:garden/3:comma$
+Switch mySwitch4 {mqtt=">[broker:garden/4:command:ON:0],>[broker:garden/4:comma$
+Switch mySwitch5 {mqtt=">[broker:garden/5:command:ON:0],>[broker:garden/5:comma$
+Switch mySwitch6 {mqtt=">[broker:garden/6:command:ON:0],>[broker:garden/6:comma$
+Switch mySwitch7 {mqtt=">[broker:garden/7:command:ON:0],>[broker:garden/7:comma$
+Switch mySwitch8 {mqtt=">[broker:garden/8:command:ON:0],>[broker:garden/8:comma$
+Number gardentemp "temp [%.1f]" {mqtt="<[broker:garden/temp:state:default]"}
+Number gardenRH "humidity [%d]" {mqtt="<[broker:garden/RH:state:default]"}
+Number gardenPPM "PPM [%d]" {mqtt="<[broker:garden/ppm:state:default]"}

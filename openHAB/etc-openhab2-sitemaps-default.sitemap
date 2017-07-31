@@ -1,0 +1,11 @@
+sitemap default label="My first sitemap"
+{
+
+    Text item=gardentemp label="temp"
+    Text item=gardenRH label="RH"
+    Text item=gardenPPM label="CO2 PPM"
+}
+
+
+
+
